@@ -2,32 +2,23 @@ let playerScore = 0;
 let computerScore = 0;
 
 capitalize = (str) => {
-    return String(str).charAt(0).toUpperCase() + String(str)
+    return String(str).charAt(0).toUpperCase() + String(str).slice(1).toLowerCase();
 }
 
 getComputerChoice = () => {
     let computerChoice = Math.floor(Math.random() * 3);
     if (computerChoice === 0) {
-        computerChoice = "rock";
+        return "Rock";
     } else if (computerChoice === 1) {
-        computerChoice = "paper";
+        return "Paper";
     } else {
-        computerChoice = "scissors";
+        return "Scissors";
     }
-    return computerChoice;
 }
 
 getHumanChoice = () => {
-    // let humanChoice = parseInt(prompt("1: Rock\n2: Paper\n3: Scissors"));
-    let humanSelection = prompt("Make your decision:\nRock\nPaper\nScissors");
-    humanSelection = humanSelection.toLocaleLowerCase();
-    // if (humanSelection === 1) {
-    //     humanSelection = "rock";
-    // } else if (humanSelection === 2) {
-    //     humanSelection = "paper";
-    // } else {
-    //     humanChoice = "scissors";
-    // }
+    let humanSelection = capitalize(prompt("Make your decision:\nRock\nPaper\nScissors"));
+
     return humanSelection;
 }
 
@@ -39,3 +30,4 @@ for (let i = 0; i < 10; i++) {
     console.log(getComputerChoice())
 }
 console.log("Human: " + getHumanChoice());
+console.log(capitalize("aTEST"))
