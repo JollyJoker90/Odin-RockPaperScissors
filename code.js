@@ -1,6 +1,10 @@
 let playerScore = 0;
 let computerScore = 0;
 
+capitalize = (str) => {
+    return String(str).charAt(0).toUpperCase() + String(str)
+}
+
 getComputerChoice = () => {
     let computerChoice = Math.floor(Math.random() * 3);
     if (computerChoice === 0) {
@@ -15,15 +19,16 @@ getComputerChoice = () => {
 
 getHumanChoice = () => {
     // let humanChoice = parseInt(prompt("1: Rock\n2: Paper\n3: Scissors"));
-    let humanSelection = prompt("Make your decision:\nRock\nPaper\nScissors")
-    if (humanChoice === 1) {
-        humanChoice = "rock";
-    } else if (humanChoice === 2) {
-        humanChoice = "paper";
-    } else {
-        humanChoice = "scissors";
-    }
-    return humanChoice;
+    let humanSelection = prompt("Make your decision:\nRock\nPaper\nScissors");
+    humanSelection = humanSelection.toLocaleLowerCase();
+    // if (humanSelection === 1) {
+    //     humanSelection = "rock";
+    // } else if (humanSelection === 2) {
+    //     humanSelection = "paper";
+    // } else {
+    //     humanChoice = "scissors";
+    // }
+    return humanSelection;
 }
 
 playRound = (human, computer) => {
