@@ -1,6 +1,3 @@
-let playerScore = 0;
-let computerScore = 0;
-
 capitalize = (str) => {
     return String(str).charAt(0).toUpperCase() + String(str).slice(1).toLowerCase();
 }
@@ -31,17 +28,35 @@ playRound = (human, computer) => {
     } else if ((human === "Rock" && computer === "Scissors") ||
         (human === "Paper" && computer === "Rock") ||
         (human === "Scissors" && computer === "Paper")) {
-        playerScore++;
+        console.log(`You win this round! ${human} beats ${computer}.`);
+        return "player"
     } else if ((human === "Paper" && computer === "Scissors") ||
         (human === "Scissors" && computer === "Rock") ||
         (human === "Rock" && computer === "Paper")) {
-        computerScore++;
+        console.log(`You lose this round! ${computer} beats ${human}.`);
+        return "computer"
     }
-    console.log(human, computer, playerScore, computerScore);
 }
 
-for (let i = 0; i < 10; i++) {
-    console.log(getComputerChoice())
+playGame = () => {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        let roundWinner = playRound(getHumanChoice(), getComputerChoice());
+        if (roundWinner === "computer") {
+            computerScore++;
+        } else if (roundWinner === "player") {
+            playerScore++;
+        }
+    }
+    if (playerScore === computerScore) {
+        console.log(`It's a tie with ${playerScore} points each.`)
+    } else if (playerScore > computerScore) {
+        console.log(`Player wins ${playerScore} to ${computerScore}`)
+    } else {
+        console.log(`Computer wins ${computerScore} to ${playerScore}`)
+    }
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+playGame();
