@@ -1,3 +1,11 @@
+const gameWindow = document.querySelector(".gameWindow");
+const btns = document.querySelectorAll("button");
+const textField = document.querySelector(".subtext");
+const playerScoreValue = document.querySelector(".playerScoreValue");
+const computerScoreValue = document.querySelector(".computerScoreValue");
+let playerScore = 0;
+let computerScore = 0;
+
 capitalize = (str) => {
     return String(str).charAt(0).toUpperCase() + String(str).slice(1).toLowerCase();
 }
@@ -23,33 +31,46 @@ getHumanChoice = () => {
 }
 
 playRound = (human, computer) => {
+    let roundWinner = "";
     if (human === computer) {
-        return
+        roundWinner = "";
     } else if ((human === "Rock" && computer === "Scissors") ||
         (human === "Paper" && computer === "Rock") ||
         (human === "Scissors" && computer === "Paper")) {
-        console.log(`You win this round! ${human} beats ${computer}.`);
-        return "player"
+        roundWinner = "player";
     } else if ((human === "Paper" && computer === "Scissors") ||
         (human === "Scissors" && computer === "Rock") ||
         (human === "Rock" && computer === "Paper")) {
-        console.log(`You lose this round! ${computer} beats ${human}.`);
-        return "computer"
+        roundWinner = "computer";
     }
+    handleRoundResult(roundWinner, human, computer);
 }
-
-const gameWindow = document.querySelector(".gameWindow");
-const btnRock = document.querySelector(".rock");
-const btnPaper = document.querySelector(".paper");
-const btnScissors = document.querySelector(".scissors");
-const btns = document.querySelectorAll("button");
 
 btns.forEach(btn => {
     btn.addEventListener("click", () => {
-        console.log("Test")
+        let playerSelection = btn.value;
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
     })
 })
 
+const handleRoundResult = (roundResult, human, computer) => {
+    let winConditionRounds = 5
+    if (roundResult === "") {
+        textField.textContent = "It's a tie.\nPlay next round.."
+    } else if (roundResult === "player") {
+        textField.textContent = `You win this round! ${human} beats ${computer}.`;
+        playerScore++;
+        playerScoreValue.textContent = playerScore.toString();
+    } else if (roundResult === "computer") {
+        textField.textContent = `You lose this round! ${computer} beats ${human}.`;
+        computerScore++;
+        computerScoreValue.textContent = computerScore.toString();
+    }
+    if (playerScore >= winConditionRounds || computerScore >= winConditionRounds) {
+        // End game
+    }
+}
 
 // playGame = () => {
 //     let playerScore = 0;
