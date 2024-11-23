@@ -1,8 +1,11 @@
 const gameWindow = document.querySelector(".gameWindow");
-const btns = document.querySelectorAll("button");
+const btns = document.querySelectorAll(".playBtn");
 const textField = document.querySelector(".subtext");
 const playerScoreValue = document.querySelector(".playerScoreValue");
 const computerScoreValue = document.querySelector(".computerScoreValue");
+const gameEndScreen = document.querySelector(".gameEndScreen");
+const gameEndScreenText = document.querySelector(".gameEndScreenText");
+const replayBtn = document.querySelector(".replay");
 let playerScore = 0;
 let computerScore = 0;
 
@@ -69,9 +72,24 @@ const handleRoundResult = (roundResult, human, computer) => {
     }
     if (playerScore >= winConditionRounds || computerScore >= winConditionRounds) {
         // End game
+        gameWindow.style.display = "none";
+        gameEndScreen.style.display = "flex";
+        if (playerScore >= winConditionRounds) {
+            gameEndScreenText.textContent = "You won!!!"
+        } else {
+            gameEndScreenText.textContent = "You loose. Try again?"
+        }
     }
 }
 
+replayBtn.addEventListener("click", () => {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreValue.textContent = playerScore.toString();
+    computerScoreValue.textContent = computerScore.toString();
+    gameWindow.style.display = "flex";
+    gameEndScreen.style.display = "none";
+})
 // playGame = () => {
 //     let playerScore = 0;
 //     let computerScore = 0;
